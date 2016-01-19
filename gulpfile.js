@@ -34,3 +34,8 @@ gulp.task('watch', function() {
 gulp.task('default', function() {
     runSequence('compile-ts', 'watch');
 });
+
+gulp.task('test', function() {
+    // run unit test via karma
+    return;
+});
