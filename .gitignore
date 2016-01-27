@@ -1,2 +1,11 @@
+# node packages
 node_modules/
+
+# elm packages
+elm-stuff/
+
+# built front-end code
+public/dist/
+
+# mac stuff
 .DS_Store

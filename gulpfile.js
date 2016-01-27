@@ -1,41 +1,28 @@
 var gulp = require('gulp');
 var util = require('gulp-util');
-var tsc = require('gulp-typescript');
+var elm = require('gulp-elm');
 var runSequence = require('run-sequence');
 
-gulp.task('compile-ts', ['compile-server', 'compile-client']);
+gulp.task('elm-init', elm.init);
 
-gulp.task('compile-server', function() {
-    return gulp.src(['./**/*.ts', '!./node_modules/**', '!./public/**/'])
-        .pipe(tsc({
-            module: "commonjs",
-            target: "ES5"
-        }))
-        .on('error', util.log)
-        .pipe(gulp.dest('./'));
+gulp.task('elm', ['elm-init'], function() {
+    return gulp.src('public/src/*.elm')
+        .pipe(elm())
+        .pipe(gulp.dest('public/dist/'));
 });
 
-gulp.task('compile-client', function() {
-    return gulp.src(['./public/**/*.ts'])
-        .pipe(tsc({
-            module: "amd",
-            target: "ES5"
-        }))
-        .on('error', util.log)
-        .pipe(gulp.dest('./public/'));
+gulp.task('copy-html', function() {
+    return gulp.src('public/src/*.html')
+        .pipe(gulp.dest('public/dist/'));
 });
 
-gulp.task('watch', function() {
-    gulp.watch(['./**/*.ts', './**/*.tsx'], function() {
-        runSequence('compile-ts');
-    });
-});
-
-gulp.task('default', function() {
-    runSequence('compile-ts', 'watch');
-});
+gulp.task('build', function() {
+    runSequence('elm', 'copy-html');
+})
 
 gulp.task('test', function() {
-    // run unit test via karma
+    // Run tests
     return;
-});
+})
+
+gulp.task('default', ['build']);

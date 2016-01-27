@@ -11,14 +11,12 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
-    "pg": "^4.4.3",
-    "react": "^0.14.0"
+    "pg": "^4.4.3"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-typescript": "^2.9.2",
+    "gulp-elm": "^0.2.0",
     "gulp-util": "^3.0.7",
-    "run-sequence": "^1.1.4",
-    "tsd": "^0.6.5"
+    "run-sequence": "^1.1.5"
   }
 }
